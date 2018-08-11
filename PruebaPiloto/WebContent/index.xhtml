@@ -15,6 +15,25 @@
 <h:body>
 <h1><p:outputLabel>Prueba Piloto</p:outputLabel></h1>
 <h3><p:outputLabel>Lista de Clientes</p:outputLabel></h3>
+<h:form>
+	<p:panel id="panel" header="Nuevo Cliente">
+	
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:outputLabel for="codigo" value="CÓDIGO: "></p:outputLabel>
+			<p:inputText id="codigo" value="" required="true" ></p:inputText>
+		
+			<p:outputLabel for="nombre" value="NOMBRE: "></p:outputLabel>
+			<p:inputText id="nombre" value="" required="true"></p:inputText>
+		
+			<p:outputLabel for="celular" value="CELULAR: "></p:outputLabel>
+			<p:inputNumber id="celular" value="" required="true"></p:inputNumber>
+		
+		</h:panelGrid>
+		
+		<p:commandButton value="Registrar" update="panel" icon="ui-icon-check"></p:commandButton>
+		
+	</p:panel>
+</h:form>
 </h:body>
 
 </html>
