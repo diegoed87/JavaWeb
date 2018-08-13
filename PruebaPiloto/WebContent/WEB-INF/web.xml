@@ -3,7 +3,7 @@
   <display-name>PruebaPiloto</display-name>
   <welcome-file-list>
   	<welcome-file>
-  		index.xhtml
+  		faces/index.xhtml
   	</welcome-file>
   </welcome-file-list>
   <servlet>
