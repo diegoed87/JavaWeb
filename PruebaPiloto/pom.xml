@@ -59,7 +59,7 @@
           <artifactId>maven-war-plugin</artifactId>
           <version>3.2.0</version>
           <configuration>
-          	<webXml>/PruebaPiloto/WebContent/WEB-INF/web.xml</webXml>
+          	<webXml>C:\Users\cpita\git\JavaWeb\PruebaPiloto\WebContent\WEB-INF\web.xml</webXml>
           </configuration>
         </plugin>
         <plugin>
