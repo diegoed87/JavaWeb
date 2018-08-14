@@ -1,5 +1,5 @@
 <html>
 <body>
-<jsp:forward page="/faces/index.xhtml" />
+<h1>Hello World</h1>
 </body>
 </html>
