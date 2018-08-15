@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core">
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
 
 
 <h:head>
@@ -13,6 +14,27 @@
 </h:head>
 
 <h:body>
-
+	<h:form id="form">
+		<p:panel id="panel" header="Registro de clientes" style="margin-bottom:10px">
+		<h:panelGrid columns="2" cellpadding="5">
+		
+			<p:outputLabel for="codigo" value="CÓDIGO: "></p:outputLabel>
+			<p:inputText id="codigo" required="true"></p:inputText>
+			
+			<p:outputLabel for="nombre" value="NOMBRE: "></p:outputLabel>
+			<p:inputText id="nombre" required="true"></p:inputText>
+			
+			<p:outputLabel for="celular" value="CELULAR: "></p:outputLabel>
+			<p:inputNumber id="celular" required="true"></p:inputNumber>
+		</h:panelGrid>
+		</p:panel>
+		
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton value="submit" update="panel" style="margin-right:20px;"></p:commandButton>
+			</f:facet>
+		</p:toolbar>
+	</h:form>
 </h:body>
+
 </html>
