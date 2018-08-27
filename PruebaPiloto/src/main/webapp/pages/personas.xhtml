@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <h:head>
+    </h:head>
+    
+    <h:body>
+    	<h:form id="form">
+    		<p:panel id="panel" header="Administración de Personas" style="margin-bottom:10px" >
+    			<h:panelGrid columns="4" cellpadding="5">
+    			
+    				<p:outputLabel for="tipoIdentificacion" value="TIPO IDENTIFICACIÓN: " ></p:outputLabel>
+    				<p:selectOneMenu id="tipoIdentificacion"  style="width:190px" required="true">
+    					<f:selectItem itemLabel="SELECCIONAR" itemValue="" />
+            			<f:selectItem itemLabel="CEDULA DE CIUDADANÍA" itemValue="CC" />
+            			<f:selectItem itemLabel="CÉDULA DE EXTRANJERÍA" itemValue="CE" />
+            			<f:selectItem itemLabel="PASAPORTE" itemValue="PA" />
+            			<f:selectItem itemLabel="TARGETA DE IDENTIDAD" itemValue="TI" />
+        			</p:selectOneMenu>
+        			
+        			<p:outputLabel for="numeroIdentificacion" value="NÚMERO IDENTIFICACIÓN: "></p:outputLabel>
+        			<p:inputNumber id="numeroIdentificacion" maxlength="12" required="true"></p:inputNumber>
+        			
+        			<p:outputLabel for="nombre" value="NOMBRE: "></p:outputLabel>
+        			<p:inputText id="nombre" required="true"></p:inputText>
+        			
+        			<p:outputLabel for="apellido" value="APELLIDO: "></p:outputLabel>
+        			<p:inputText id="apellido" required="true"></p:inputText>
+        			
+        			<p:outputLabel for="edad" value="EDAD: "></p:outputLabel>
+        			<p:inputNumber id="edad" maxlength="2" required="true"></p:inputNumber>
+        			
+        			<p:outputLabel for="correo" value="CORREO: "></p:outputLabel>
+        			<p:inputText id="correo" required="false"></p:inputText>
+        			
+        			<p:outputLabel for="telefono" value="TELEFONO: "></p:outputLabel>
+        			<p:inputText id="telefono" required="true"></p:inputText>
+        			
+        			<p:outputLabel for="direccion" value="DIRECCIÓN: "></p:outputLabel>
+        			<p:inputText id="direccion" required="true"></p:inputText>
+        			
+        			<p:outputLabel for="ciudad" value="CIUDAD: "></p:outputLabel>
+        			<p:inputNumber id="ciudad" maxlength="2" required="true"></p:inputNumber>
+        			
+        			<p:outputLabel for="tipoPersona" value="TIPO PERSONA: " ></p:outputLabel>
+    				<p:selectOneMenu id="tipoPersona"  style="width:125px" required="true">
+    					<f:selectItem itemLabel="SELECCIONAR" itemValue="" />
+            			<f:selectItem itemLabel="ADMINISTRADOR" itemValue="A" />
+            			<f:selectItem itemLabel="EMPLEADO" itemValue="E" />
+            			<f:selectItem itemLabel="CLIENTE" itemValue="C" />
+        			</p:selectOneMenu>
+        			
+        			<p:outputLabel for="usuario" value="USUARIO: "></p:outputLabel>
+        			<p:inputText id="usuario" required="false"></p:inputText>
+        			
+        			<p:outputLabel for="contrasenia" value="CONTRASEÑA: "></p:outputLabel>
+        			<p:inputText id="contrasenia" required="false"></p:inputText>
+        			
+        			
+    			</h:panelGrid>
+    		</p:panel>
+    	</h:form>
+    
+    </h:body>
+    
+</html>

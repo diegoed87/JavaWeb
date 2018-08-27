@@ -4,4 +4,6 @@
     <library javadoc="http://docs.oracle.com/cd/E24329_01/apirefs.1211/e24391" path="server/lib/wls-api.jar"/>
     <library path="modules/features/weblogic.server.merged.jar"/>
     <module id="glassfish.jsf"/>
+    <library path="%ORACLE_COMMON_MODULES_DIR%/javax.persistence_2.1.jar"/>
+    <module id="oracle.toplink.eclipselink"/>
 </system-libraries>

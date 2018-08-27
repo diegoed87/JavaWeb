@@ -4,4 +4,9 @@
       <attribute name="provider-id" value="wls-system-library-provider-jsf-2.1"/>
     </node>
   </facet>
+  <facet id="jpt.jpa">
+    <node name="libprov">
+      <attribute name="provider-id" value="wls-system-library-provider-eclipselink-1213"/>
+    </node>
+  </facet>
 </root>
