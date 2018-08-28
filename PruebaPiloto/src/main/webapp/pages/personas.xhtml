@@ -12,11 +12,11 @@
     
     <h:body>
     	<h:form id="form">
-    		<p:panel id="panel" header="Administración de Personas" style="margin-bottom:10px" >
-    			<h:panelGrid columns="4" cellpadding="5">
+    		<p:panel id="panel" header="Administración de Personas" style="margin-bottom:10px;font-size:12px;" >
+    			<h:panelGrid columns="6" cellpadding="2">
     			
     				<p:outputLabel for="tipoIdentificacion" value="TIPO IDENTIFICACIÓN: " ></p:outputLabel>
-    				<p:selectOneMenu id="tipoIdentificacion"  style="width:190px" required="true">
+    				<p:selectOneMenu id="tipoIdentificacion"  style="font-size:12px;" required="true">
     					<f:selectItem itemLabel="SELECCIONAR" itemValue="" />
             			<f:selectItem itemLabel="CEDULA DE CIUDADANÍA" itemValue="CC" />
             			<f:selectItem itemLabel="CÉDULA DE EXTRANJERÍA" itemValue="CE" />
@@ -27,11 +27,11 @@
         			<p:outputLabel for="numeroIdentificacion" value="NÚMERO IDENTIFICACIÓN: "></p:outputLabel>
         			<p:inputNumber id="numeroIdentificacion" maxlength="12" required="true"></p:inputNumber>
         			
-        			<p:outputLabel for="nombre" value="NOMBRE: "></p:outputLabel>
-        			<p:inputText id="nombre" required="true"></p:inputText>
+        			<p:outputLabel for="nombre" value="NOMBRE: " ></p:outputLabel>
+        			<p:inputText id="nombre" required="true" ></p:inputText>
         			
         			<p:outputLabel for="apellido" value="APELLIDO: "></p:outputLabel>
-        			<p:inputText id="apellido" required="true"></p:inputText>
+        			<p:inputText id="apellido" required="true" style="width:190px"></p:inputText>
         			
         			<p:outputLabel for="edad" value="EDAD: "></p:outputLabel>
         			<p:inputNumber id="edad" maxlength="2" required="true"></p:inputNumber>
@@ -40,7 +40,7 @@
         			<p:inputText id="correo" required="false"></p:inputText>
         			
         			<p:outputLabel for="telefono" value="TELEFONO: "></p:outputLabel>
-        			<p:inputText id="telefono" required="true"></p:inputText>
+        			<p:inputText id="telefono" required="true" style="width:190px"></p:inputText>
         			
         			<p:outputLabel for="direccion" value="DIRECCIÓN: "></p:outputLabel>
         			<p:inputText id="direccion" required="true"></p:inputText>
@@ -49,7 +49,7 @@
         			<p:inputNumber id="ciudad" maxlength="2" required="true"></p:inputNumber>
         			
         			<p:outputLabel for="tipoPersona" value="TIPO PERSONA: " ></p:outputLabel>
-    				<p:selectOneMenu id="tipoPersona"  style="width:125px" required="true">
+    				<p:selectOneMenu id="tipoPersona"  style="font-size:12px;width:180px;" required="true">
     					<f:selectItem itemLabel="SELECCIONAR" itemValue="" />
             			<f:selectItem itemLabel="ADMINISTRADOR" itemValue="A" />
             			<f:selectItem itemLabel="EMPLEADO" itemValue="E" />
@@ -62,10 +62,84 @@
         			<p:outputLabel for="contrasenia" value="CONTRASEÑA: "></p:outputLabel>
         			<p:inputText id="contrasenia" required="false"></p:inputText>
         			
-        			
     			</h:panelGrid>
     		</p:panel>
     	</h:form>
+    	
+    	<h:form>
+    	
+    	<p:messages id="messages" showDetail="true" closable="true">
+        	<p:autoUpdate />
+    	</p:messages>
+    	 
+    	<p:dataTable id="listaPersonas" var="persona" value="#{personaMB.personas}" style="font-size:12px;" rows="10" paginator="true" >
+    		<f:facet name="header">Listado de personas</f:facet>
+    		
+    		<p:column headerText="TIPO IDENTIFICACIÓN">
+    			<h:outputText value="#{persona.id.tipoIdentificacion}"></h:outputText>
+    		</p:column>
+    		
+    		<p:column headerText="NÚMERO IDENTIFICACIÓN">
+    			<h:outputText value="#{persona.id.numeroIdentificacion}"></h:outputText>
+    		</p:column>
+    		
+    		<p:column headerText="NOMBRE">
+    			<h:outputText value="#{persona.nombrePersona}"></h:outputText>
+    		</p:column>
+    		
+    		<p:column headerText="APELLIDO">
+    			<h:outputText value="#{persona.apellidoPersona}"></h:outputText>
+    		</p:column>
+    		
+    		<p:column headerText="EDAD" style="width:45px">
+    			<h:outputText value="#{persona.edad}"></h:outputText>
+    		</p:column>
+    		
+    		<p:column headerText="CORREO">
+    			<h:outputText value="#{persona.correo}"></h:outputText>
+    		</p:column>
+    		
+    		<p:column headerText="TELEFONO">
+    			<h:outputText value="#{persona.telefono}"></h:outputText>
+    		</p:column>
+    		
+    		<p:column headerText="CIUDAD">
+    			<h:outputText value="#{persona.localidadesGeografica.nombre}"></h:outputText>
+    		</p:column>
+    		
+    		<p:column headerText="TIPO">
+    			<h:outputText value="#{persona.tipoPersona}"></h:outputText>
+    		</p:column>
+    	
+    		<p:column headerText="USUARIO">
+    			<h:outputText value="#{persona.usuario}"></h:outputText>
+    		</p:column>
+    		
+    		<p:column headerText="CONTRASEÑA">
+    			<h:outputText value="#{persona.contrasenia}"></h:outputText>
+    		</p:column>
+    		
+    		<p:column headerText="ACCIONES" style="width:70px">
+    			<p:commandButton id="eliminar" icon="ui-icon-closethick" update="listaPersonas" actionListener="#{personaMB.eliminarPersona(persona.id)}">
+    				<!--  <f:setPropertyActionListener value="#{persona}" target="#{personaMB.persona}"></f:setPropertyActionListener> -->
+    			
+    			<p:confirm header="Confirmación" message="¿Está seguro de eliminar la persona?" icon="ui-icon-alert" />
+    			</p:commandButton>
+    			
+    			<p:commandButton id="editar" icon="ui-icon-pencil" >
+    				
+    			</p:commandButton>
+    			<p:rowEditor></p:rowEditor>
+    			
+    			
+    		</p:column>
+    		
+    	</p:dataTable>
+    	</h:form>
+    	 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+        	<p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        	<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+    	</p:confirmDialog>
     
     </h:body>
     
