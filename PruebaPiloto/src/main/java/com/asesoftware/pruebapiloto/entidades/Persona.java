@@ -46,6 +46,27 @@ public class Persona implements Serializable {
 
 	public Persona() {
 	}
+	
+	
+
+	public Persona(PersonaPK id, String apellidoPersona, String contrasenia, String correo, String direccion,
+			BigDecimal edad, String nombrePersona, String telefono, String tipoPersona, String usuario,
+			LocalidadesGeografica localidadesGeografica) {
+		super();
+		this.id = id;
+		this.apellidoPersona = apellidoPersona;
+		this.contrasenia = contrasenia;
+		this.correo = correo;
+		this.direccion = direccion;
+		this.edad = edad;
+		this.nombrePersona = nombrePersona;
+		this.telefono = telefono;
+		this.tipoPersona = tipoPersona;
+		this.usuario = usuario;
+		this.localidadesGeografica = localidadesGeografica;
+	}
+
+
 
 	public PersonaPK getId() {
 		return this.id;

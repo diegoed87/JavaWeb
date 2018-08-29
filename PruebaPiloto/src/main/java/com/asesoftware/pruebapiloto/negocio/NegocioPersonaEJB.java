@@ -6,8 +6,10 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import com.asesoftware.pruebapiloto.entidades.LocalidadesGeografica;
 import com.asesoftware.pruebapiloto.entidades.Persona;
 import com.asesoftware.pruebapiloto.entidades.PersonaPK;
+import com.asesoftware.pruebapiloto.integracion.GestionLocalidadesGeograficasBD;
 import com.asesoftware.pruebapiloto.integracion.GestionPersonaDB;
 
 /**
@@ -20,11 +22,22 @@ public class NegocioPersonaEJB {
 	@EJB
 	private GestionPersonaDB gestionPersonaDB;
 	
+	@EJB
+	private GestionLocalidadesGeograficasBD gestionLocalidadesGeograficasBD;
+	
 	/**
      * Default constructor. 
      */
 	public NegocioPersonaEJB() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public LocalidadesGeografica consultarLocalidadPorId(String codigo) {
+		return gestionLocalidadesGeograficasBD.consultarLocalidadPorId(codigo);
+	}
+	
+	public void guardarPersona(Persona persona) {
+		gestionPersonaDB.guardarPerson(persona);
 	}
 	
 	public Persona  consultarPersonaPorId(PersonaPK personaPK) {

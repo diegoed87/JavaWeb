@@ -17,7 +17,15 @@ public class PersonaPK implements Serializable {
 
 	@Column(name="NUMERO_IDENTIFICACION")
 	private long numeroIdentificacion;
+	
+	
 
+	public PersonaPK(String tipoIdentificacion, long numeroIdentificacion) {
+		super();
+		this.tipoIdentificacion = tipoIdentificacion;
+		this.numeroIdentificacion = numeroIdentificacion;
+	}
+	
 	public PersonaPK() {
 	}
 	public String getTipoIdentificacion() {

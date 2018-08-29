@@ -21,6 +21,10 @@ public class GestionPersonaDB {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public void guardarPerson(Persona persona) {
+		em.persist(persona);		
+	}
+	
 	public void eliminarPersona(PersonaPK personaPK) {
 		try {
 			Persona persona = em.find(Persona.class, personaPK);
