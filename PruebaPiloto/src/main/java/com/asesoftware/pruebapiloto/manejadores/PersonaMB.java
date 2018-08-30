@@ -47,6 +47,8 @@ public class PersonaMB {
 	}
 	
 	public void guardarPersona() {
+		System.out.println("Funcionando!!...........");
+		System.out.println("Código ciudad: "+codigoCiudad);
 		persona = new Persona();
 		personaPK = new PersonaPK(tipoIdentificacion,Long.parseLong(numeroIdentificacion));
 		

@@ -66,12 +66,9 @@
         			<p:inputText id="contrasenia" required="false" value="#{personaMB.contrasenia}"></p:inputText>
         			
     			</h:panelGrid>
-    				<p:commandButton value="GUARDAR" update="panel" style="margin-right:20px;" actionListener="personaMB.guardarPersona()"></p:commandButton>
+    				<p:commandButton value="GUARDAR" update="form" style="margin-right:20px;" actionListener="#{personaMB.guardarPersona()}"></p:commandButton>
     		</p:panel>
-    			
-					<f:facet name="left">
-						<p:commandButton value="GUARDAR" update="panel" style="margin-right:20px;"></p:commandButton>
-					</f:facet>
+    		
 				
     	</h:form>
     	

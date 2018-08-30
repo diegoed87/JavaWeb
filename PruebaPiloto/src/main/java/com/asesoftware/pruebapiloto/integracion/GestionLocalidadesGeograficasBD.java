@@ -27,7 +27,17 @@ public class GestionLocalidadesGeograficasBD {
 	 */
 	
 	public LocalidadesGeografica consultarLocalidadPorId(String codigo) {
-		return em.find(LocalidadesGeografica.class, codigo);
+		LocalidadesGeografica aux =null;
+		try {
+		aux = em.find(LocalidadesGeografica.class, codigo);
+		System.out.println("Ciudad Encontrada: "+aux.getNombre());
+		}catch(Exception e) {
+			System.out.println("-----------ERROR AL BUSCAR LA CIUDAD-----------");
+			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
+		}
+		
+		return aux;
 	}
 	
 	@SuppressWarnings("unchecked")
