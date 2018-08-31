@@ -156,6 +156,7 @@ public class PersonaMB {
 		personaSeleccionada =(Persona) tabla.getRowData();
 		String aux = personaSeleccionada.getNombrePersona();
 		System.out.println("Persona Seleccionada : "+aux);
+		this.nombrePersona = personaSeleccionada.getNombrePersona();
 	}
 	
 	

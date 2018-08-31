@@ -134,7 +134,7 @@
     			<p:confirm header="Confirmación" message="¿Está seguro de eliminar la persona?" icon="ui-icon-alert" />
     			</p:commandButton>
     			
-    			<p:commandButton id="editar" icon="ui-icon-pencil" actionListener="#{personaMB.cargarPersonaEditar()}">
+    			<p:commandButton id="editar" icon="ui-icon-pencil" actionListener="#{personaMB.cargarPersonaEditar()}" update="form">
     				<f:setPropertyActionListener value="#{persona}" target="#{personaMB.personaSeleccionada}"></f:setPropertyActionListener>
     			</p:commandButton>
     			
