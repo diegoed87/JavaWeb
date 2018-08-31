@@ -66,19 +66,21 @@
         			<p:inputText id="contrasenia" required="false" value="#{personaMB.contrasenia}"></p:inputText>
         			
     			</h:panelGrid>
-    				<p:commandButton value="GUARDAR" update="form" style="margin-right:20px;" actionListener="#{personaMB.guardarPersona()}"></p:commandButton>
+    				<p:commandButton value="GUARDAR" update="form,formTable" style="margin-right:20px;" actionListener="#{personaMB.guardarPersona()}">
+    				</p:commandButton>
+    				
     		</p:panel>
     		
 				
     	</h:form>
     	
-    	<h:form>
+    	<h:form id="formTable">
     	
     	<p:messages id="messages" showDetail="true" closable="true">
         	<p:autoUpdate />
     	</p:messages>
     	 
-    	<p:dataTable id="listaPersonas" var="persona" value="#{personaMB.personas}" style="font-size:12px;" rows="10" paginator="true" >
+    	<p:dataTable id="listaPersonas" var="persona" value="#{personaMB.personas}" style="font-size:12px;" rows="10" paginator="true" binding="#{personaMB.tabla}">
     		<f:facet name="header">Listado de personas</f:facet>
     		
     		<p:column headerText="TIPO IDENTIFICACIÓN">
@@ -132,8 +134,8 @@
     			<p:confirm header="Confirmación" message="¿Está seguro de eliminar la persona?" icon="ui-icon-alert" />
     			</p:commandButton>
     			
-    			<p:commandButton id="editar" icon="ui-icon-pencil" >
-    				
+    			<p:commandButton id="editar" icon="ui-icon-pencil" actionListener="#{personaMB.cargarPersonaEditar()}">
+    				<f:setPropertyActionListener value="#{persona}" target="#{personaMB.personaSeleccionada}"></f:setPropertyActionListener>
     			</p:commandButton>
     			
     			

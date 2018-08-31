@@ -26,7 +26,7 @@ public class GestionLocalidadesGeograficasBD {
 	 * @return LISTA DE CIUDADES
 	 */
 	
-	public LocalidadesGeografica consultarLocalidadPorId(String codigo) {
+	public LocalidadesGeografica consultarLocalidadPorId(Long codigo) {
 		LocalidadesGeografica aux =null;
 		try {
 		aux = em.find(LocalidadesGeografica.class, codigo);

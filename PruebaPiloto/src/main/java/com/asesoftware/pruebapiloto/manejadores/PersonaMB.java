@@ -10,6 +10,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.component.datatable.DataTable;
 import com.asesoftware.pruebapiloto.entidades.Persona;
 import com.asesoftware.pruebapiloto.entidades.PersonaPK;
 
@@ -34,6 +35,8 @@ public class PersonaMB {
 	private String tipoPersona;
 	private String usuario;
 	private String contrasenia;
+	private Persona personaSeleccionada;
+	private DataTable tabla;
 	
 	@EJB
 	private NegocioPersonaEJB negocioPersonaEJB;
@@ -42,6 +45,7 @@ public class PersonaMB {
 	@PostConstruct
 	public void init() {
 		this.persona = new Persona();
+		this.personaSeleccionada = new Persona();
 		this.personas = new ArrayList<>();
 		this.consultarPersonas();
 	}
@@ -60,7 +64,7 @@ public class PersonaMB {
 		persona.setTelefono(telefono);
 		persona.setDireccion(direccion);
 		try {
-		persona.setLocalidadesGeografica(negocioPersonaEJB.consultarLocalidadPorId(codigoCiudad));
+		persona.setLocalidadesGeografica(negocioPersonaEJB.consultarLocalidadPorId(new Long(codigoCiudad)));
 		}catch (Exception e) {
 			mostrarMensaje2("Error al consultar Ciudad", "Error");
 		}
@@ -71,6 +75,22 @@ public class PersonaMB {
 		this.negocioPersonaEJB.guardarPersona(persona);
 		mostrarMensaje(this.persona.getNombrePersona()+"  Registrada");
 		this.consultarPersonas();
+		this.limpiarCampos();
+	}
+	
+	public void limpiarCampos() {
+		this.tipoIdentificacion=null;
+		this.nombrePersona = null;
+		this.apellidoPersona = null;
+		this.edad = null;
+		this.correo = null;
+		this.telefono = null;
+		this.telefono = null;
+		this.direccion = null;
+		this.codigoCiudad = null;
+		this.tipoPersona = null;
+		this.usuario = null;
+		this.contrasenia = null;
 	}
 	
 	public void eliminarPersona(PersonaPK personaPk) {
@@ -129,6 +149,15 @@ public class PersonaMB {
 			}
         
 	}
+	
+	
+	public void cargarPersonaEditar() {
+		limpiarCampos();
+		personaSeleccionada =(Persona) tabla.getRowData();
+		String aux = personaSeleccionada.getNombrePersona();
+		System.out.println("Persona Seleccionada : "+aux);
+	}
+	
 	
 	
 	public void mensaje() {
@@ -238,6 +267,24 @@ public class PersonaMB {
 	public void setTipoPersona(String tipoPersona) {
 		this.tipoPersona = tipoPersona;
 	}
+
+	public Persona getPersonaSeleccionada() {
+		return personaSeleccionada;
+	}
+
+	public void setPersonaSeleccionada(Persona personaSeleccionada) {
+		this.personaSeleccionada = personaSeleccionada;
+	}
+
+	public DataTable getTabla() {
+		return tabla;
+	}
+
+	public void setTabla(DataTable tabla) {
+		this.tabla = tabla;
+	}
+
+	
 	
 	
 }

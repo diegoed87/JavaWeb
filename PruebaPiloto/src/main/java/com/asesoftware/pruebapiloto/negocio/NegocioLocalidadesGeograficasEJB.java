@@ -24,7 +24,7 @@ public class NegocioLocalidadesGeograficasEJB {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public LocalidadesGeografica consultarLocalidadPorId(String codigo) {
+	public LocalidadesGeografica consultarLocalidadPorId(Long codigo) {
 		return gestionLocalidadesGeograficasBD.consultarLocalidadPorId(codigo);
 	}
 	
