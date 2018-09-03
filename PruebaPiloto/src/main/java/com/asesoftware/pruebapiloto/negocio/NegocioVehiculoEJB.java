@@ -9,50 +9,51 @@ import javax.ejb.Stateless;
 import com.asesoftware.pruebapiloto.entidades.LocalidadesGeografica;
 import com.asesoftware.pruebapiloto.entidades.Persona;
 import com.asesoftware.pruebapiloto.entidades.PersonaPK;
+import com.asesoftware.pruebapiloto.entidades.Vehiculo;
 import com.asesoftware.pruebapiloto.integracion.GestionLocalidadesGeograficasBD;
 import com.asesoftware.pruebapiloto.integracion.GestionPersonaDB;
+import com.asesoftware.pruebapiloto.integracion.GestionVehiculosDB;
 
 /**
 * Session Bean implementation class NegocioPersonaEJB
 */
 @Stateless
 @LocalBean
-public class NegocioPersonaEJB {
-
+public class NegocioVehiculoEJB {
+	
+	@EJB
+	private GestionVehiculosDB gestionVehiculosDB;
+	
 	@EJB
 	private GestionPersonaDB gestionPersonaDB;
 	
 	@EJB
 	private GestionLocalidadesGeograficasBD gestionLocalidadesGeograficasBD;
 	
-	/**
-     * Default constructor. 
-     */
-	public NegocioPersonaEJB() {
-		// TODO Auto-generated constructor stub
-	}
-	
 	public LocalidadesGeografica consultarLocalidadPorId(Long codigo) {
 		return gestionLocalidadesGeograficasBD.consultarLocalidadPorId(codigo);
 	}
 	
-	public void guardarPersona(Persona persona) {
-		gestionPersonaDB.guardarPerson(persona);
+	public NegocioVehiculoEJB() {
+		// TODO Auto-generated constructor stub
 	}
 	
-	public Persona  consultarPersonaPorId(PersonaPK personaPK) {
-		return gestionPersonaDB.consultarPersonaPorId(personaPK);
+	public void guardarVehiculo(Vehiculo vehiculo) {
+		gestionVehiculosDB.guardarVehiculo(vehiculo);
 	}
 	
-	public List<Persona> consultarPersonas(){
-		return gestionPersonaDB.consultarPersonas();
+	public List<Vehiculo> consultarVehiculoPorCliente(String numCliente){
+		return gestionVehiculosDB.consultarVehiculoPorCliente(numCliente);
 	}
 	
-	public void eliminarPersona(PersonaPK personaPK) {
-		gestionPersonaDB.eliminarPersona(personaPK);
+	public Persona consultarPersonaPorID(PersonaPK personaPK) {
+		Persona persona = null;
+		try {
+			persona = gestionPersonaDB.consultarPersonaPorId(personaPK);
+		}catch (Exception e) {
+			System.out.println("Ocurrio un error al consultar la persona ");
+		}
+		return persona;
 	}
-	
-	public void editarPersona(Persona persona) {
-		gestionPersonaDB.editarPersona(persona);
-	}
+
 }

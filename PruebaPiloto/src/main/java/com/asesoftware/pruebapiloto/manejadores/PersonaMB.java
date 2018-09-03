@@ -37,6 +37,7 @@ public class PersonaMB {
 	private String contrasenia;
 	private Persona personaSeleccionada;
 	private DataTable tabla;
+	private boolean disable;
 	
 	@EJB
 	private NegocioPersonaEJB negocioPersonaEJB;
@@ -44,6 +45,7 @@ public class PersonaMB {
 	
 	@PostConstruct
 	public void init() {
+		this.disable = true;
 		this.persona = new Persona();
 		this.personaSeleccionada = new Persona();
 		this.personas = new ArrayList<>();
@@ -54,7 +56,7 @@ public class PersonaMB {
 		System.out.println("Funcionando!!...........");
 		System.out.println("Código ciudad: "+codigoCiudad);
 		persona = new Persona();
-		personaPK = new PersonaPK(tipoIdentificacion,Long.parseLong(numeroIdentificacion));
+		personaPK = new PersonaPK(tipoIdentificacion,numeroIdentificacion);
 		
 		persona.setId(personaPK);
 		persona.setNombrePersona(nombrePersona);
@@ -80,6 +82,7 @@ public class PersonaMB {
 	
 	public void limpiarCampos() {
 		this.tipoIdentificacion=null;
+		this.numeroIdentificacion = null;
 		this.nombrePersona = null;
 		this.apellidoPersona = null;
 		this.edad = null;
@@ -91,6 +94,7 @@ public class PersonaMB {
 		this.tipoPersona = null;
 		this.usuario = null;
 		this.contrasenia = null;
+		this.disable = true;
 	}
 	
 	public void eliminarPersona(PersonaPK personaPk) {
@@ -102,7 +106,31 @@ public class PersonaMB {
 		aux = null;
 	}
 	
-	
+	public void editarPersona() {
+		personaSeleccionada.setNombrePersona(nombrePersona);
+		personaSeleccionada.setApellidoPersona(apellidoPersona);
+		personaSeleccionada.setEdad(new BigDecimal(edad));
+		personaSeleccionada.setCorreo(correo);
+		personaSeleccionada.setTelefono(telefono);
+		personaSeleccionada.setDireccion(direccion);
+		try {
+			personaSeleccionada.setLocalidadesGeografica(negocioPersonaEJB.consultarLocalidadPorId(new Long(codigoCiudad)));
+			}catch (Exception e) {
+				mostrarMensaje2("Error al consultar Ciudad", "Error");
+			}
+		personaSeleccionada.setTipoPersona(tipoPersona);
+		personaSeleccionada.setUsuario(usuario);
+		personaSeleccionada.setContrasenia(contrasenia);
+		try{
+		this.negocioPersonaEJB.editarPersona(personaSeleccionada);
+		mostrarMensaje(this.personaSeleccionada.getNombrePersona()+"  Modificada");
+		this.consultarPersonas();
+		this.limpiarCampos();
+		}catch (Exception e) {
+			mostrarMensaje2("Error al editar la Persona", "Error");
+		}
+		
+	}
 	
 	public void consultarPersonas() {
 		this.personas = negocioPersonaEJB.consultarPersonas();
@@ -156,9 +184,21 @@ public class PersonaMB {
 		personaSeleccionada =(Persona) tabla.getRowData();
 		String aux = personaSeleccionada.getNombrePersona();
 		System.out.println("Persona Seleccionada : "+aux);
+		this.tipoIdentificacion = personaSeleccionada.getId().getTipoIdentificacion();
+		this.numeroIdentificacion =String.valueOf(personaSeleccionada.getId().getNumeroIdentificacion());
 		this.nombrePersona = personaSeleccionada.getNombrePersona();
+		this.apellidoPersona = personaSeleccionada.getApellidoPersona();
+		this.edad = String.valueOf(personaSeleccionada.getEdad());
+		this.correo =personaSeleccionada.getCorreo();
+		this.telefono = personaSeleccionada.getTelefono();
+		this.direccion = personaSeleccionada.getDireccion();
+		this.codigoCiudad = String.valueOf(personaSeleccionada.getLocalidadesGeografica().getCodigo());
+		this.tipoPersona = personaSeleccionada.getTipoPersona();
+		this.usuario = personaSeleccionada.getUsuario();
+		this.contrasenia = personaSeleccionada.getContrasenia();
+		this.disable = false;
 	}
-	
+
 	
 	
 	public void mensaje() {
@@ -285,7 +325,15 @@ public class PersonaMB {
 		this.tabla = tabla;
 	}
 
+	public boolean isDisable() {
+		return disable;
+	}
+
+	public void setDisable(boolean disable) {
+		this.disable = disable;
+	}
+
 	
 	
 	
-}
+	}

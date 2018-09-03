@@ -3,6 +3,7 @@ package com.asesoftware.pruebapiloto.entidades;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 
 /**
@@ -44,29 +45,12 @@ public class Persona implements Serializable {
 	@JoinColumn(name="LOCGEO_CODIGO")
 	private LocalidadesGeografica localidadesGeografica;
 
+	//bi-directional many-to-one association to Vehiculo
+	@OneToMany(mappedBy="persona")
+	private List<Vehiculo> vehiculos;
+
 	public Persona() {
 	}
-	
-	
-
-	public Persona(PersonaPK id, String apellidoPersona, String contrasenia, String correo, String direccion,
-			BigDecimal edad, String nombrePersona, String telefono, String tipoPersona, String usuario,
-			LocalidadesGeografica localidadesGeografica) {
-		super();
-		this.id = id;
-		this.apellidoPersona = apellidoPersona;
-		this.contrasenia = contrasenia;
-		this.correo = correo;
-		this.direccion = direccion;
-		this.edad = edad;
-		this.nombrePersona = nombrePersona;
-		this.telefono = telefono;
-		this.tipoPersona = tipoPersona;
-		this.usuario = usuario;
-		this.localidadesGeografica = localidadesGeografica;
-	}
-
-
 
 	public PersonaPK getId() {
 		return this.id;
@@ -154,6 +138,28 @@ public class Persona implements Serializable {
 
 	public void setLocalidadesGeografica(LocalidadesGeografica localidadesGeografica) {
 		this.localidadesGeografica = localidadesGeografica;
+	}
+
+	public List<Vehiculo> getVehiculos() {
+		return this.vehiculos;
+	}
+
+	public void setVehiculos(List<Vehiculo> vehiculos) {
+		this.vehiculos = vehiculos;
+	}
+
+	public Vehiculo addVehiculo(Vehiculo vehiculo) {
+		getVehiculos().add(vehiculo);
+		vehiculo.setPersona(this);
+
+		return vehiculo;
+	}
+
+	public Vehiculo removeVehiculo(Vehiculo vehiculo) {
+		getVehiculos().remove(vehiculo);
+		vehiculo.setPersona(null);
+
+		return vehiculo;
 	}
 
 }

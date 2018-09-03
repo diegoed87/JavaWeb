@@ -5,5 +5,6 @@
 	<class>com.asesoftware.pruebapiloto.entidades.LocalidadesGeografica</class>
 	<class>com.asesoftware.pruebapiloto.entidades.Persona</class>
 	<class>com.asesoftware.pruebapiloto.entidades.PersonaPK</class>
+	<class>com.asesoftware.pruebapiloto.entidades.Vehiculo</class>
 	</persistence-unit>
 </persistence>

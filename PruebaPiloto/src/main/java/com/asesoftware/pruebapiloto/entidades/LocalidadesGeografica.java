@@ -31,6 +31,10 @@ public class LocalidadesGeografica implements Serializable {
 	@OneToMany(mappedBy="localidadesGeografica")
 	private List<Persona> personas;
 
+	//bi-directional many-to-one association to Vehiculo
+	@OneToMany(mappedBy="localidadesGeografica")
+	private List<Vehiculo> vehiculos;
+
 	public LocalidadesGeografica() {
 	}
 
@@ -86,6 +90,28 @@ public class LocalidadesGeografica implements Serializable {
 		persona.setLocalidadesGeografica(null);
 
 		return persona;
+	}
+
+	public List<Vehiculo> getVehiculos() {
+		return this.vehiculos;
+	}
+
+	public void setVehiculos(List<Vehiculo> vehiculos) {
+		this.vehiculos = vehiculos;
+	}
+
+	public Vehiculo addVehiculo(Vehiculo vehiculo) {
+		getVehiculos().add(vehiculo);
+		vehiculo.setLocalidadesGeografica(this);
+
+		return vehiculo;
+	}
+
+	public Vehiculo removeVehiculo(Vehiculo vehiculo) {
+		getVehiculos().remove(vehiculo);
+		vehiculo.setLocalidadesGeografica(null);
+
+		return vehiculo;
 	}
 
 }

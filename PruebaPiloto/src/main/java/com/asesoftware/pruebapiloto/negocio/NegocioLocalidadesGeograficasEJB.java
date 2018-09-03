@@ -7,6 +7,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import com.asesoftware.pruebapiloto.entidades.LocalidadesGeografica;
+import com.asesoftware.pruebapiloto.entidades.Persona;
 import com.asesoftware.pruebapiloto.integracion.GestionLocalidadesGeograficasBD;
 
 @Stateless
@@ -31,4 +32,6 @@ public class NegocioLocalidadesGeograficasEJB {
 	public List<LocalidadesGeografica> consultarTodasCiudades(){
 		return gestionLocalidadesGeograficasBD.consultarTodasCiudades();
 	}
+	
+	
 }

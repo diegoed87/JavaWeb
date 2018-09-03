@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:form id="form">
+		<p:panel id="panel" header="Datos de CLiente"
+			style="margin-bottom:10px;font-size:12px;">
+			<h:panelGrid columns="6" cellpadding="2">
+				<p:outputLabel for="tipoIdentificacion"
+					value="TIPO IDENTIFICACIÓN: "></p:outputLabel>
+				<p:selectOneMenu id="tipoIdentificacion" style="font-size:12px;"
+					required="true" value="#{vehiculoMB.clienteTipoIdentificacion}">
+					<f:selectItem itemLabel="SELECCIONAR" itemValue="" />
+					<f:selectItem itemLabel="CEDULA DE CIUDADANÍA" itemValue="CC" />
+					<f:selectItem itemLabel="CÉDULA DE EXTRANJERÍA" itemValue="CE" />
+					<f:selectItem itemLabel="PASAPORTE" itemValue="PA" />
+					<f:selectItem itemLabel="TARGETA DE IDENTIDAD" itemValue="TI" />
+				</p:selectOneMenu>
+
+				<p:outputLabel for="numeroIdentificacion"
+					value="NÚMERO IDENTIFICACIÓN: "></p:outputLabel>
+				<p:inputNumber id="numeroIdentificacion" maxlength="12"
+					required="true" value="#{vehiculoMB.clienteNumeroIdentificacion}"></p:inputNumber>
+
+				<p:commandButton value="BUSCAR" style="margin-right:20px;"
+					update="form,formTable,formVehiculo"
+					actionListener="#{vehiculoMB.buscarCliente()}">
+				</p:commandButton>
+				
+				<p:outputLabel></p:outputLabel>
+
+				<p:outputLabel value="NOMBRE: "></p:outputLabel>
+				<p:outputLabel value="#{vehiculoMB.nombreCliente}"></p:outputLabel>
+				<p:outputLabel value="TELÉFONO: "></p:outputLabel>
+				<p:outputLabel value="#{vehiculoMB.telefonoCliente}"></p:outputLabel>
+				<p:outputLabel value="DIRECCIÓN: "></p:outputLabel>
+				<p:outputLabel value="#{vehiculoMB.direccionCliente}"></p:outputLabel>
+			</h:panelGrid>
+			
+		</p:panel>
+
+	</h:form>
+	
+	<h:form id="formVehiculo" style="font-size:12px;">
+			<p:commandButton value="AGREGAR VEHICULO" style="margin-right:20px;"
+					process="@this" onclick="PF('dlg').show();" disabled="#{vehiculoMB.disable}">		
+			</p:commandButton>
+			
+			<p:growl id="growl" sticky="true" showDetail="true" life="3000" />	
+			
+			<p:dialog header="Registro de Vehiculo" widgetVar="dlg"
+						dynamic="true" modal="true" > 												
+							<h:panelGrid columns="2">
+							
+							<p:outputLabel for="placa" value="PLACA: "></p:outputLabel>
+							<p:inputText id="placa" maxlength="7" required="true"
+							value="#{vehiculoMB.placa}"></p:inputText>
+							
+							<p:outputLabel for="ciudad" value="CIUDAD: "></p:outputLabel>
+								<p:selectOneMenu id="ciudad" style="font-size:12px;width:132px;"
+									required="true" value="#{vehiculoMB.codigoCiudad}">
+									<f:selectItem itemLabel="SELECCIONAR" itemValue=""></f:selectItem>
+									<f:selectItems value="#{localidadGeograficaMB.ciudades}"
+										var="ciudad" itemLabel="#{ciudad.nombre}"
+										itemValue="#{ciudad.codigo}"></f:selectItems>
+								</p:selectOneMenu>
+
+								<p:outputLabel for="tipoVehiculo" value="TIPO VEHICULO: "></p:outputLabel>
+								<p:selectOneMenu id="tipoVehiculo" style="font-size:12px;"
+									required="true" value="#{vehiculoMB.tipoVehiculo}">
+									<f:selectItem itemLabel="SELECCIONAR" itemValue="" />
+									<f:selectItem itemLabel="AUTOMÓVIL" itemValue="AU" />
+									<f:selectItem itemLabel="CAMIONETA" itemValue="CA" />
+									<f:selectItem itemLabel="CAMIÓN" itemValue="CM" />
+									<f:selectItem itemLabel="TRACTO CAMIÓN" itemValue="TR" />
+								</p:selectOneMenu>
+
+								<p:outputLabel for="marca" value="MARCA: "></p:outputLabel>
+								<p:inputText id="marca" maxlength="15" required="true"
+									value="#{vehiculoMB.marca}"></p:inputText>
+
+								<p:outputLabel for="modelo" value="MODELO: "></p:outputLabel>
+								<p:inputText id="modelo" maxlength="20" required="true"
+									value="#{vehiculoMB.modelo}"></p:inputText>
+
+								<p:outputLabel for="color" value="COLOR: "></p:outputLabel>
+								<p:inputText id="color" maxlength="15" required="true"
+									value="#{vehiculoMB.color}"></p:inputText>
+
+								<p:outputLabel for="anio" value="AÑO: "></p:outputLabel>
+								<p:inputNumber id="anio" maxlength="4" required="true"
+									value="#{vehiculoMB.anio}"></p:inputNumber>
+
+								<p:outputLabel for="kilometraje" value="KILOMETRAJE: "></p:outputLabel>
+								<p:inputNumber id="kilometraje" maxlength="10" required="true"
+									value="#{vehiculoMB.kilometraje}"></p:inputNumber>
+							
+							<p:commandButton value="REGISTRAR" update="growl,formTable" style="margin-right:20px;"  actionListener="#{vehiculoMB.guardarVehiculo()}" oncomplete="PF('dlg').hide();">
+    						</p:commandButton>
+			</h:panelGrid>
+			</p:dialog>
+	</h:form>
+	<br></br>
+
+</h:head>
+
+
+<h:body>
+	<h:form id="formTable">
+
+		<p:messages id="messages" showDetail="true" closable="true">
+			<p:autoUpdate />
+		</p:messages>
+
+		<p:dataTable id="listaVehiculos" style="font-size:12px;" rows="10"
+			var="vehiculo" value="#{vehiculoMB.listaVehiculos}">
+			<f:facet name="header">
+           		VEHICULOS REGISTRADOS
+       		</f:facet>
+
+			<p:column headerText="PLACA" style="width:80px">
+				<h:outputText value="#{vehiculo.placa}"></h:outputText>
+			</p:column>
+
+			<p:column headerText="CIUDAD" style="width:120px">
+				<h:outputText value="#{vehiculo.localidadesGeografica.nombre}"></h:outputText>
+			</p:column>
+
+			<p:column headerText="TIPO" style="width:80px">
+				<h:outputText value="#{vehiculo.tipoVehiculo}"></h:outputText>
+			</p:column>
+
+			<p:column headerText="MARCA">
+				<h:outputText value="#{vehiculo.marca}"></h:outputText>
+			</p:column>
+
+			<p:column headerText="MODELO">
+				<h:outputText value="#{vehiculo.modelo}"></h:outputText>
+			</p:column>
+
+			<p:column headerText="AÑO" style="width:70px">
+				<h:outputText value="#{vehiculo.año}"></h:outputText>
+			</p:column>
+
+			<p:column headerText="COLOR" style="width:80px">
+				<h:outputText value="#{vehiculo.color}"></h:outputText>
+			</p:column>
+
+			<p:column headerText="KILOMETRAJE" style="width:90px">
+				<h:outputText value="#{vehiculo.kilometraje}"></h:outputText>
+			</p:column>
+
+
+		</p:dataTable>
+
+	</h:form>
+</h:body>
+
+</html>

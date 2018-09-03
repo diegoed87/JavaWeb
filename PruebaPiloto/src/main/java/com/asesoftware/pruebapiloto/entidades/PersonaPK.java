@@ -16,28 +16,29 @@ public class PersonaPK implements Serializable {
 	private String tipoIdentificacion;
 
 	@Column(name="NUMERO_IDENTIFICACION")
-	private long numeroIdentificacion;
-	
-	
+	private String numeroIdentificacion;
 
-	public PersonaPK(String tipoIdentificacion, long numeroIdentificacion) {
+	public PersonaPK() {
+	}
+	
+	public PersonaPK(String tipoIdentificacion, String numeroIdentificacion) {
 		super();
 		this.tipoIdentificacion = tipoIdentificacion;
 		this.numeroIdentificacion = numeroIdentificacion;
 	}
-	
-	public PersonaPK() {
-	}
+
+
+
 	public String getTipoIdentificacion() {
 		return this.tipoIdentificacion;
 	}
 	public void setTipoIdentificacion(String tipoIdentificacion) {
 		this.tipoIdentificacion = tipoIdentificacion;
 	}
-	public long getNumeroIdentificacion() {
+	public String getNumeroIdentificacion() {
 		return this.numeroIdentificacion;
 	}
-	public void setNumeroIdentificacion(long numeroIdentificacion) {
+	public void setNumeroIdentificacion(String numeroIdentificacion) {
 		this.numeroIdentificacion = numeroIdentificacion;
 	}
 
@@ -51,14 +52,14 @@ public class PersonaPK implements Serializable {
 		PersonaPK castOther = (PersonaPK)other;
 		return 
 			this.tipoIdentificacion.equals(castOther.tipoIdentificacion)
-			&& (this.numeroIdentificacion == castOther.numeroIdentificacion);
+			&& this.numeroIdentificacion.equals(castOther.numeroIdentificacion);
 	}
 
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;
 		hash = hash * prime + this.tipoIdentificacion.hashCode();
-		hash = hash * prime + ((int) (this.numeroIdentificacion ^ (this.numeroIdentificacion >>> 32)));
+		hash = hash * prime + this.numeroIdentificacion.hashCode();
 		
 		return hash;
 	}

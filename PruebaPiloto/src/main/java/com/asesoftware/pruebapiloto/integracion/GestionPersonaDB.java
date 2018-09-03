@@ -25,6 +25,10 @@ public class GestionPersonaDB {
 		em.persist(persona);		
 	}
 	
+	public void editarPersona(Persona persona) {
+		em.merge(persona);
+	}
+	
 	public void eliminarPersona(PersonaPK personaPK) {
 		try {
 			Persona persona = em.find(Persona.class, personaPK);
