@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    
+<h:head>
+	
+</h:head>    
+    
+<h:body>
+	<h:form>
+		<p:panel id="panel" header="REGISTRO DE CITAS" style="margin-bottom:10px;font-size:12px;">
+			<h:panelGrid columns="8" cellpadding="2">
+				
+				<p:outputLabel for="codigo" value="CODIGO: "></p:outputLabel>
+				<p:inputText id="codigo" disabled="true"></p:inputText>
+			
+				<p:outputLabel for="fechaReg" value="FECHA REGISTRO: "></p:outputLabel>
+				<p:inputText id="fechaReg" disabled="true"></p:inputText>
+			
+				<p:outputLabel for="codigoCliente" value="CLIENTE: "></p:outputLabel>
+				<p:inputNumber id="codigoCliente" required="true" maxlength="12"></p:inputNumber>
+			
+				<p:commandButton value="BUSCAR">
+				</p:commandButton>
+				<p:outputLabel></p:outputLabel>
+				
+				<p:outputLabel for="nombre" value="NOMBRE: "></p:outputLabel>
+				<p:inputNumber id="nombre" required="true" maxlength="12" disabled="true"></p:inputNumber>
+			
+				<p:outputLabel for="telefono" value="TELEFONO: "></p:outputLabel>
+				<p:inputNumber id="telefono" required="true" maxlength="12" disabled="true"></p:inputNumber>
+			
+				<p:outputLabel for="direccion" value="DIRECCIÓN: "></p:outputLabel>
+				<p:inputNumber id="direccion" required="true" maxlength="12" disabled="true"></p:inputNumber>
+			
+				<p:outputLabel for="placa" value="VEHICULO: "></p:outputLabel>
+				<p:selectOneMenu id="placa"  style="font-size:12px;width:180px;" required="true" >
+    					<f:selectItem itemLabel="SELECCIONAR" itemValue="" />
+        		</p:selectOneMenu>
+        		
+        		<p:outputLabel for="fechaCita" value="FECHA CITA: "></p:outputLabel>
+				<p:calendar id="fechaCita"  mindate="3/9/18" />
+				
+				<p:outputLabel for="numMecanico" value="MECANICO: "></p:outputLabel>
+				<p:selectOneMenu id="numMecanico"  style="font-size:12px;width:180px;" required="true" >
+    					<f:selectItem itemLabel="SELECCIONAR" itemValue="" />
+        		</p:selectOneMenu>
+        		
+        		<p:outputLabel for="procedimiento" value="PROCEDIMIENTO: "></p:outputLabel>
+				<p:selectOneMenu id="procedimiento"  style="font-size:12px;width:180px;" required="true" >
+    					<f:selectItem itemLabel="SELECCIONAR" itemValue="" />
+        		</p:selectOneMenu>	
+        		
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>    
+    
+</html>

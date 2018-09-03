@@ -49,6 +49,14 @@ public class Persona implements Serializable {
 	@OneToMany(mappedBy="persona")
 	private List<Vehiculo> vehiculos;
 
+	//bi-directional many-to-one association to Cita
+	@OneToMany(mappedBy="persona1")
+	private List<Cita> citas1;
+
+	//bi-directional many-to-one association to Cita
+	@OneToMany(mappedBy="persona2")
+	private List<Cita> citas2;
+
 	public Persona() {
 	}
 
@@ -160,6 +168,50 @@ public class Persona implements Serializable {
 		vehiculo.setPersona(null);
 
 		return vehiculo;
+	}
+
+	public List<Cita> getCitas1() {
+		return this.citas1;
+	}
+
+	public void setCitas1(List<Cita> citas1) {
+		this.citas1 = citas1;
+	}
+
+	public Cita addCitas1(Cita citas1) {
+		getCitas1().add(citas1);
+		citas1.setPersona1(this);
+
+		return citas1;
+	}
+
+	public Cita removeCitas1(Cita citas1) {
+		getCitas1().remove(citas1);
+		citas1.setPersona1(null);
+
+		return citas1;
+	}
+
+	public List<Cita> getCitas2() {
+		return this.citas2;
+	}
+
+	public void setCitas2(List<Cita> citas2) {
+		this.citas2 = citas2;
+	}
+
+	public Cita addCitas2(Cita citas2) {
+		getCitas2().add(citas2);
+		citas2.setPersona2(this);
+
+		return citas2;
+	}
+
+	public Cita removeCitas2(Cita citas2) {
+		getCitas2().remove(citas2);
+		citas2.setPersona2(null);
+
+		return citas2;
 	}
 
 }
