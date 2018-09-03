@@ -50,6 +50,7 @@ public class PersonaMB {
 		this.personaSeleccionada = new Persona();
 		this.personas = new ArrayList<>();
 		this.consultarPersonas();
+		
 	}
 	
 	public void guardarPersona() {

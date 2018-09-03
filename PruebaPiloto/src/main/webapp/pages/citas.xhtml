@@ -14,21 +14,32 @@
 <h:body>
 	<h:form>
 		<p:panel id="panel" header="REGISTRO DE CITAS" style="margin-bottom:10px;font-size:12px;">
-			<h:panelGrid columns="8" cellpadding="2">
+			<h:panelGrid columns="2" cellpadding="2">
 				
 				<p:outputLabel for="codigo" value="CODIGO: "></p:outputLabel>
 				<p:inputText id="codigo" disabled="true"></p:inputText>
 			
 				<p:outputLabel for="fechaReg" value="FECHA REGISTRO: "></p:outputLabel>
 				<p:inputText id="fechaReg" disabled="true"></p:inputText>
-			
-				<p:outputLabel for="codigoCliente" value="CLIENTE: "></p:outputLabel>
-				<p:inputNumber id="codigoCliente" required="true" maxlength="12"></p:inputNumber>
-			
-				<p:commandButton value="BUSCAR">
-				</p:commandButton>
-				<p:outputLabel></p:outputLabel>
 				
+				<p:outputLabel for="tipoIdentificacion" value="TIPO IDENTIFICACIÓN: "></p:outputLabel>
+				<p:selectOneMenu id="tipoIdentificacion"  style="font-size:12px;" required="true" >
+    					<f:selectItem itemLabel="SELECCIONAR" itemValue="" />
+            			<f:selectItem itemLabel="CEDULA DE CIUDADANÍA" itemValue="CC" />
+            			<f:selectItem itemLabel="CÉDULA DE EXTRANJERÍA" itemValue="CE" />
+            			<f:selectItem itemLabel="PASAPORTE" itemValue="PA" />
+            			<f:selectItem itemLabel="TARGETA DE IDENTIDAD" itemValue="TI" />
+        		</p:selectOneMenu>
+			
+				<p:outputLabel for="numeroIdentificacion" value="NÚMERO IDENTIFICACIÓN: "></p:outputLabel>
+				<p:inputNumber id="numeroIdentificacion" required="true" maxlength="12"></p:inputNumber>
+			
+				<p:commandButton value="BUSCAR" update="panel" process="@this">
+				</p:commandButton>
+				
+				<br></br>
+				<br></br>
+			
 				<p:outputLabel for="nombre" value="NOMBRE: "></p:outputLabel>
 				<p:inputNumber id="nombre" required="true" maxlength="12" disabled="true"></p:inputNumber>
 			
@@ -49,12 +60,16 @@
 				<p:outputLabel for="numMecanico" value="MECANICO: "></p:outputLabel>
 				<p:selectOneMenu id="numMecanico"  style="font-size:12px;width:180px;" required="true" >
     					<f:selectItem itemLabel="SELECCIONAR" itemValue="" />
+    					<f:selectItems value="#{citaMB.listaMecanicos}" var="mec" itemLabel="#{mec.nombrePersona}" itemValue="#{mec.id}"></f:selectItems>
         		</p:selectOneMenu>
         		
         		<p:outputLabel for="procedimiento" value="PROCEDIMIENTO: "></p:outputLabel>
 				<p:selectOneMenu id="procedimiento"  style="font-size:12px;width:180px;" required="true" >
     					<f:selectItem itemLabel="SELECCIONAR" itemValue="" />
+    					<f:selectItems value="#{citaMB.listaProcedimientos}" var="proc" itemLabel="#{proc.nombreProcedimiento}" itemValue="#{codigoProcedimiento}"></f:selectItems>
         		</p:selectOneMenu>	
+        		
+        		<p:commandButton value="REGISTRAR" update="panel" disabled="#{citaMB.disable}"></p:commandButton>
         		
 			</h:panelGrid>
 		</p:panel>

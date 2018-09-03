@@ -60,6 +60,11 @@ public class GestionPersonaDB {
 		return persona;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Persona> consultarMecanicos(){
+		Query queryConsultaMecanicos = em.createQuery("select p from Persona p where p.tipoPersona = 'E'");
+		return queryConsultaMecanicos.getResultList();
+	}
 	
 
 }

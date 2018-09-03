@@ -4,15 +4,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core">
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
 
 
 <h:head>
-	<h1>Prueba Piloto</h1>
-	<h2>Lista de Clientes</h2>
+	<h:form>
+		<p:menubar>
+			<p:submenu label="Archivo" icon="ui-icon-document">
+				<p:submenu label="Nuevo" icon="ui-icon-contact">
+					<p:menuitem value="Cliente" url="#"></p:menuitem>
+					<p:separator></p:separator>
+					<p:menuitem value="Salir" url="#"></p:menuitem>
+				</p:submenu>
+			</p:submenu>
+			<p:submenu label="Editar" icon="ui-icon-pencil">
+				<p:menuitem value="Cliente" url="#" icon="ui-icon-pencil"></p:menuitem>
+			</p:submenu>
+			
+			<f:facet name="options">
+				<p:inputText style="margin-right:10px" placeholder="Search"></p:inputText>
+				<p:commandButton type="button" value="Buscar" icon="ui-icon-extlink"></p:commandButton>
+			</f:facet>
+			
+		</p:menubar>
+		
+	</h:form>
+	<p:imageSwitch id="images" effect="face" widgetVar="gallery" slideshowAuto="false">
+		<p:graphicImage library="images" name="imagen1.jpeg" height="150" width="100%"></p:graphicImage>
+	</p:imageSwitch>
+	<h1 align="center">Taller de Mecanica</h1>
 </h:head>
 
 <h:body>
 
 </h:body>
+
+
+
+
 </html>
