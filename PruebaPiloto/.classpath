@@ -34,6 +34,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/javax.ejb_3.3.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
