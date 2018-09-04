@@ -1,11 +1,13 @@
 package pruebasCRUD;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 
-public class PruebaRegistro {
 
+
+
+public class PruebaRegistro {
+	
 	@Test
 	   public void sumaPositivos() {
 	      System.out.println("Sumando dos números positivos ...");
