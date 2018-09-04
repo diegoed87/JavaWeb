@@ -17,6 +17,11 @@
   			</configuration> 			
   		</plugin>
   	</plugins>
+  	<testResources>
+  		<testResource>
+  			<directory>${project.basedir}/src/test/java/pruebasCRUD/</directory>
+  		</testResource>
+  	</testResources>
   </build>
   
   
