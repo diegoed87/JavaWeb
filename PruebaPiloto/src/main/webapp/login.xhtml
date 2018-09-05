@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+</h:head>
+<h:body style="text-align:center">
+	<p:growl id="mensajes" showDetail="true" life="2000" />
+  <h:form>
+    <p:panel header="Login" style="width:400px">
+      <h:panelGrid id="grid" columns="2" cellpadding="5">
+        <h:outputLabel for="username" value="Usuario:"/>
+        <p:inputText  id="username" required="true" value="#{usuarioMB.usuario}"/>
+        
+           
+        <h:outputLabel for="password" value="Contraseña:"/>
+        <p:password id="password" required="true" value="#{usuarioMB.contrasenia}"/>
+           
+        <f:facet name="footer">
+          <p:commandButton id="loginButton" value="Sign In" actionListener="#{usuarioMB.consultarUser}" update="grid"/>
+        </f:facet>
+        <p:messages id="messages" showDetail="true" closable="true">
+     	   <p:autoUpdate />
+    	</p:messages>
+        
+        
+        
+        	<!-- <p:selectOneMenu id="Usuarios">
+					<f:selectItems value="#{usuarioMB.listanombres}"/>				
+			</p:selectOneMenu> -->
+      </h:panelGrid>
+    </p:panel>
+  </h:form>
+</h:body>
+</html>

@@ -40,6 +40,10 @@ public class NegocioCitaEJB {
 		gestionCitasBD.guardarCita(cita);
 	}
 	
+	public List<Cita> consultarCitas(){
+		return gestionCitasBD.consultarCitas();
+	}
+	
 	public Procedimiento consultarProcedimientoPorCodigo(long codigo) {
 		return gestionProcedimientosBD.consultarProcedimientoPorCodigo(codigo);
 	}

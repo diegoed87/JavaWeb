@@ -9,6 +9,13 @@
 
 <h:head>
 	<h:form id="form">
+	<p:menubar>
+			<p:submenu label="Archivo" icon="ui-icon-document">
+				<p:menuitem value="Inicio" url="http://localhost:7001/PruebaPiloto/index.xhtml" icon="ui-icon-pencil"></p:menuitem>
+				<p:menuitem value="Clientes" url="http://localhost:7001/PruebaPiloto/pages/personas.xhtml" icon="ui-icon-pencil"></p:menuitem>
+				<p:menuitem value="Citas" url="http://localhost:7001/PruebaPiloto/pages/citas.xhtml" icon="ui-icon-pencil"></p:menuitem>
+			</p:submenu>
+	</p:menubar>
 		<p:panel id="panel" header="Datos de CLiente"
 			style="margin-bottom:10px;font-size:12px;">
 			<h:panelGrid columns="6" cellpadding="2">

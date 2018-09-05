@@ -49,6 +49,7 @@ public class CitaMB {
 	private Vehiculo vehiculo;
 	private String placa;
 	private int auxCode; // Código de cita pasado a Entero
+	private List<Cita> listaCitas;
 	
 	
 	@EJB
@@ -69,11 +70,13 @@ public class CitaMB {
 		this.mecanico = new Persona();
 		this.personaMecanicoPK = new PersonaPK();
 		this.vehiculo = new Vehiculo();
+		this.listaCitas = new ArrayList<>();
 		formatearFecha();
 		codigoCita();
 		System.out.println("Código cita: "+auxCode);
 		System.out.println("Codigo CIta Aumentado : "+(auxCode+1));
 		this.auxCode = auxCode+1;
+		consultarCitas();
 	}
 	
 	public void guardarCita() {
@@ -94,6 +97,7 @@ public class CitaMB {
 		
 		negocioCitaEJB.guardarCita(cita);;
 		mostrarMensaje2("Cita Para Vehiculo "+placa+" y cliente "+personaCliente.getNombrePersona()+" Registrada!", "Info");
+		consultarCitas();
 		limpiarCampos();
 	}
 	
@@ -114,6 +118,9 @@ public class CitaMB {
 		}
 	}
 	
+	public void consultarCitas() {
+		this.listaCitas = negocioCitaEJB.consultarCitas();
+	}
 	
 	public void consultarProcedimientos() {
 		listaProcedimientos = negocioCitaEJB.consultarProcedimientos();
@@ -386,6 +393,14 @@ public class CitaMB {
 
 	public void setAuxCode(int auxCode) {
 		this.auxCode = auxCode;
+	}
+
+	public List<Cita> getListaCitas() {
+		return listaCitas;
+	}
+
+	public void setListaCitas(List<Cita> listaCitas) {
+		this.listaCitas = listaCitas;
 	}
 
 	

@@ -12,20 +12,10 @@
 	<h:form>
 		<p:menubar>
 			<p:submenu label="Archivo" icon="ui-icon-document">
-				<p:submenu label="Nuevo" icon="ui-icon-contact">
-					<p:menuitem value="Cliente" url="#"></p:menuitem>
-					<p:separator></p:separator>
-					<p:menuitem value="Salir" url="#"></p:menuitem>
-				</p:submenu>
+				<p:menuitem value="Cliente" url="http://localhost:7001/PruebaPiloto/pages/personas.xhtml" icon="ui-icon-pencil"></p:menuitem>
+				<p:menuitem value="Vehiculos" url="http://localhost:7001/PruebaPiloto/pages/vehiculos.xhtml" icon="ui-icon-pencil"></p:menuitem>
+				<p:menuitem value="Citas" url="http://localhost:7001/PruebaPiloto/pages/citas.xhtml" icon="ui-icon-pencil"></p:menuitem>
 			</p:submenu>
-			<p:submenu label="Editar" icon="ui-icon-pencil">
-				<p:menuitem value="Cliente" url="#" icon="ui-icon-pencil"></p:menuitem>
-			</p:submenu>
-			
-			<f:facet name="options">
-				<p:inputText style="margin-right:10px" placeholder="Search"></p:inputText>
-				<p:commandButton type="button" value="Buscar" icon="ui-icon-extlink"></p:commandButton>
-			</f:facet>
 			
 		</p:menubar>
 		

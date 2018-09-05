@@ -8,11 +8,18 @@
     xmlns:p="http://primefaces.org/ui">
     
 <h:head>
-	
+	<p:menubar>
+			<p:submenu label="Archivo" icon="ui-icon-document">
+				<p:menuitem value="Inicio" url="http://localhost:7001/PruebaPiloto/index.xhtml" icon="ui-icon-pencil"></p:menuitem>
+				<p:menuitem value="Clientes" url="http://localhost:7001/PruebaPiloto/pages/personas.xhtml" icon="ui-icon-pencil"></p:menuitem>
+				<p:menuitem value="Vehiculos" url="http://localhost:7001/PruebaPiloto/pages/vehiculos.xhtml" icon="ui-icon-pencil"></p:menuitem>
+			</p:submenu>			
+		</p:menubar>
 </h:head>    
     
 <h:body>
 	<h:form id="form" style="width: 599px; ">
+	
 		<p:messages id="messages" showDetail="true" closable="true">
         	<p:autoUpdate />
     	</p:messages>
@@ -92,14 +99,49 @@
         			<br></br>
         		</p:inputTextarea>
         		
-        		<p:commandButton value="REGISTRAR" update="form,formVehiculo,growl,panelVehiculo" disabled="#{citaMB.disable}" actionListener="#{citaMB.guardarCita()}"></p:commandButton>
+        		<p:commandButton value="REGISTRAR" update="form,formVehiculo,growl,panelVehiculo,formTable" disabled="#{citaMB.disable}" actionListener="#{citaMB.guardarCita()}"></p:commandButton>
         
         		
 			</h:panelGrid>
 		</p:panel>
 	
 	</h:form>
-	
+	<br></br>
+	<h:form id="formTable" >
+		<p:dataTable id="listaCitas" var="cita" value="#{citaMB.listaCitas}" style="font-size:12px;" rows="10" paginator="true">
+			<f:facet name="header">Listado de Citas</f:facet>
+			
+			<p:column headerText="CODIGO">
+    			<h:outputText value="#{cita.codigo}"></h:outputText>
+    		</p:column>
+    		
+    		<p:column headerText="FECHA DE REGISTRO: ">
+    			<h:outputText value="#{cita.fechaRegistro}"></h:outputText>
+    		</p:column>	
+    		
+    		<p:column headerText="CLIENTE: ">
+    			<h:outputText value="#{cita.persona2.nombrePersona}"></h:outputText>
+    		</p:column>	
+    		
+    		<p:column headerText="VEHICULO: ">
+    			<h:outputText value="#{cita.vehiculo.placa}"></h:outputText>
+    		</p:column>
+    		
+    		<p:column headerText="FECHA CITA: ">
+    			<h:outputText value="#{cita.fechaCita}"></h:outputText>
+    		</p:column>
+    		
+    		<p:column headerText="MECANICO: ">
+    			<h:outputText value="#{cita.persona1.nombrePersona}"></h:outputText>
+    		</p:column>
+    		
+    		<p:column headerText="PROCEDIMIENTO: ">
+    			<h:outputText value="#{cita.procedimiento.nombreProcedimiento}"></h:outputText>
+    		</p:column>
+    		
+		</p:dataTable>
+			
+	</h:form>
 	
 </h:body>    
     
