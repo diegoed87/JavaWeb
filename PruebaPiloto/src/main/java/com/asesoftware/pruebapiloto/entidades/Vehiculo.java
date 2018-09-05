@@ -3,6 +3,7 @@ package com.asesoftware.pruebapiloto.entidades;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 
 /**
@@ -30,6 +31,10 @@ public class Vehiculo implements Serializable {
 
 	@Column(name="TIPO_VEHICULO")
 	private String tipoVehiculo;
+
+	//bi-directional many-to-one association to Cita
+	@OneToMany(mappedBy="vehiculo")
+	private List<Cita> citas;
 
 	//bi-directional many-to-one association to LocalidadesGeografica
 	@ManyToOne
@@ -101,6 +106,28 @@ public class Vehiculo implements Serializable {
 
 	public void setTipoVehiculo(String tipoVehiculo) {
 		this.tipoVehiculo = tipoVehiculo;
+	}
+
+	public List<Cita> getCitas() {
+		return this.citas;
+	}
+
+	public void setCitas(List<Cita> citas) {
+		this.citas = citas;
+	}
+
+	public Cita addCita(Cita cita) {
+		getCitas().add(cita);
+		cita.setVehiculo(this);
+
+		return cita;
+	}
+
+	public Cita removeCita(Cita cita) {
+		getCitas().remove(cita);
+		cita.setVehiculo(null);
+
+		return cita;
 	}
 
 	public LocalidadesGeografica getLocalidadesGeografica() {

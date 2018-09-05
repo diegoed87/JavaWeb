@@ -12,18 +12,21 @@
 </h:head>    
     
 <h:body>
-	<h:form style="width: 599px; ">
-		<p:panel id="panel" header="REGISTRO DE CITAS" style="margin-bottom:10px;font-size:12px;">
+	<h:form id="form" style="width: 599px; ">
+		<p:messages id="messages" showDetail="true" closable="true">
+        	<p:autoUpdate />
+    	</p:messages>
+		<p:panel id="panel" header="REGISTRO DE CITAS" style="margin-bottom:10px;font-size:12px; width:left;" >
 			<h:panelGrid columns="2" cellpadding="2">
 				
 				<p:outputLabel for="codigo" value="CODIGO: "></p:outputLabel>
-				<p:inputText id="codigo" disabled="true"></p:inputText>
+				<p:inputText id="codigo" disabled="true" value="#{citaMB.auxCode}"></p:inputText>
 			
 				<p:outputLabel for="fechaReg" value="FECHA REGISTRO: "></p:outputLabel>
-				<p:inputText id="fechaReg" disabled="true"></p:inputText>
+				<p:inputText id="fechaReg" disabled="true" value="#{citaMB.fechaRegistro}"></p:inputText>
 				
 				<p:outputLabel for="tipoIdentificacion" value="TIPO IDENTIFICACIÓN: "></p:outputLabel>
-				<p:selectOneMenu id="tipoIdentificacion"  style="font-size:12px;" required="true" >
+				<p:selectOneMenu id="tipoIdentificacion"  style="font-size:12px;" required="true" value="#{citaMB.clienteTipoIdentificacion}">
     					<f:selectItem itemLabel="SELECCIONAR" itemValue="" />
             			<f:selectItem itemLabel="CEDULA DE CIUDADANÍA" itemValue="CC" />
             			<f:selectItem itemLabel="CÉDULA DE EXTRANJERÍA" itemValue="CE" />
@@ -32,48 +35,72 @@
         		</p:selectOneMenu>
 			
 				<p:outputLabel for="numeroIdentificacion" value="NÚMERO IDENTIFICACIÓN: "></p:outputLabel>
-				<p:inputNumber id="numeroIdentificacion" required="true" maxlength="12"></p:inputNumber>
+				<p:inputNumber id="numeroIdentificacion" required="true" maxlength="12" value="#{citaMB.clienteNumeroIdentificacion}"></p:inputNumber>
 			
-				<p:commandButton value="BUSCAR" update="panel" process="@this">
+				<p:commandButton value="BUSCAR" update="panel,formVehiculo" actionListener="#{citaMB.buscarCLiente()}">
 				</p:commandButton>
 				
 				<br></br>
 				<br></br>
 			
 				<p:outputLabel for="nombre" value="NOMBRE: "></p:outputLabel>
-				<p:inputNumber id="nombre" required="true" maxlength="12" disabled="true"></p:inputNumber>
+				<p:inputText id="nombre" required="true" maxlength="12" disabled="true" value="#{citaMB.nombreCliente}"></p:inputText>
 			
 				<p:outputLabel for="telefono" value="TELEFONO: "></p:outputLabel>
-				<p:inputNumber id="telefono" required="true" maxlength="12" disabled="true"></p:inputNumber>
+				<p:inputText id="telefono" required="true" maxlength="12" disabled="true" value="#{citaMB.telefonoCliente}"></p:inputText>
 			
 				<p:outputLabel for="direccion" value="DIRECCIÓN: "></p:outputLabel>
-				<p:inputNumber id="direccion" required="true" maxlength="12" disabled="true"></p:inputNumber>
+				<p:inputText id="direccion" required="true" maxlength="12" disabled="true" value="#{citaMB.direccionCLiente}"></p:inputText>
 			
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+		
+		<h:form id="formVehiculo" style="width: 597px; ">
+		<p:growl id="growl" sticky="true" showDetail="true" life="3000" />	
+			<p:panel id="panelVehiculo" header="DATOS VEHICULO" style="margin-bottom:10px;font-size:12px; width:center;">
+				<h:panelGrid columns="2" cellpadding="2">	
+				
 				<p:outputLabel for="placa" value="VEHICULO: "></p:outputLabel>
-				<p:selectOneMenu id="placa"  style="font-size:12px;width:180px;" required="true" >
+				<p:selectOneMenu id="placa"  style="font-size:12px;width:180px;" required="true" value="#{citaMB.placa}">
     					<f:selectItem itemLabel="SELECCIONAR" itemValue="" />
+    					<f:selectItems value="#{citaMB.listaVehiculos}" var="veh" itemLabel="#{veh.placa}" itemValue="#{veh.placa}"></f:selectItems>
         		</p:selectOneMenu>
         		
         		<p:outputLabel for="fechaCita" value="FECHA CITA: "></p:outputLabel>
-				<p:calendar id="fechaCita"  mindate="3/9/18" />
+				<p:calendar id="fechaCita"   navigator="true" pattern="dd 'de' MMMM 'de' yyyy" mindate="#{citaMB.fechaRegistro}" value="#{citaMB.dateCita}" required="true">
+					
+				</p:calendar>
+				
 				
 				<p:outputLabel for="numMecanico" value="MECANICO: "></p:outputLabel>
-				<p:selectOneMenu id="numMecanico"  style="font-size:12px;width:180px;" required="true" >
+				<p:selectOneMenu id="numMecanico"  style="font-size:12px;width:180px;" required="true" value="#{citaMB.mecanicoNumeroIdentificacion}">
     					<f:selectItem itemLabel="SELECCIONAR" itemValue="" />
-    					<f:selectItems value="#{citaMB.listaMecanicos}" var="mec" itemLabel="#{mec.nombrePersona}" itemValue="#{mec.id}"></f:selectItems>
+    					<f:selectItems value="#{citaMB.listaMecanicos}" var="mec" itemLabel="#{mec.nombrePersona}" itemValue="#{mec.id.numeroIdentificacion}"></f:selectItems>
         		</p:selectOneMenu>
         		
         		<p:outputLabel for="procedimiento" value="PROCEDIMIENTO: "></p:outputLabel>
-				<p:selectOneMenu id="procedimiento"  style="font-size:12px;width:180px;" required="true" >
+				<p:selectOneMenu id="procedimiento"  style="font-size:12px;width:180px;" required="true" value="#{citaMB.codigoProcedimiento}">
     					<f:selectItem itemLabel="SELECCIONAR" itemValue="" />
-    					<f:selectItems value="#{citaMB.listaProcedimientos}" var="proc" itemLabel="#{proc.nombreProcedimiento}" itemValue="#{codigoProcedimiento}"></f:selectItems>
+    					<f:selectItems value="#{citaMB.listaProcedimientos}" var="proc" itemLabel="#{proc.nombreProcedimiento}" itemValue="#{proc.codigoProcedimiento}"></f:selectItems>
         		</p:selectOneMenu>	
         		
-        		<p:commandButton value="REGISTRAR" update="panel" disabled="#{citaMB.disable}"></p:commandButton>
+        		<p:outputLabel value="OBSERVACIONES: "></p:outputLabel>
+        		<p:inputTextarea rows="5" cols="30" counter="display" maxlength="500" counterTemplate="{0} Caracteres faltantes" autoResize="false" value="#{citaMB.observaciones}">
+        			
+        			<h:outputText id="display"></h:outputText>
+        			<br></br>
+        		</p:inputTextarea>
+        		
+        		<p:commandButton value="REGISTRAR" update="form,formVehiculo,growl,panelVehiculo" disabled="#{citaMB.disable}" actionListener="#{citaMB.guardarCita()}"></p:commandButton>
+        
         		
 			</h:panelGrid>
 		</p:panel>
+	
 	</h:form>
+	
+	
 </h:body>    
     
 </html>

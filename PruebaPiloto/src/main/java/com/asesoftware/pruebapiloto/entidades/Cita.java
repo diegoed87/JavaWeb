@@ -16,6 +16,9 @@ public class Cita implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(generator = "CODIGO")
+	@SequenceGenerator(name="CODIGO" , sequenceName="SEQ_CITA",allocationSize = 1 )
+	@Column(name="CODIGO")
 	private long codigo;
 
 	@Temporal(TemporalType.DATE)
@@ -27,8 +30,6 @@ public class Cita implements Serializable {
 	private Date fechaRegistro;
 
 	private String observaciones;
-
-	private String placa;
 
 	//bi-directional many-to-one association to Persona
 	@ManyToOne
@@ -50,6 +51,11 @@ public class Cita implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="CODIGO_PROCEDIMIENTO")
 	private Procedimiento procedimiento;
+
+	//bi-directional many-to-one association to Vehiculo
+	@ManyToOne
+	@JoinColumn(name="PLACA")
+	private Vehiculo vehiculo;
 
 	public Cita() {
 	}
@@ -86,14 +92,6 @@ public class Cita implements Serializable {
 		this.observaciones = observaciones;
 	}
 
-	public String getPlaca() {
-		return this.placa;
-	}
-
-	public void setPlaca(String placa) {
-		this.placa = placa;
-	}
-
 	public Persona getPersona1() {
 		return this.persona1;
 	}
@@ -116,6 +114,14 @@ public class Cita implements Serializable {
 
 	public void setProcedimiento(Procedimiento procedimiento) {
 		this.procedimiento = procedimiento;
+	}
+
+	public Vehiculo getVehiculo() {
+		return this.vehiculo;
+	}
+
+	public void setVehiculo(Vehiculo vehiculo) {
+		this.vehiculo = vehiculo;
 	}
 
 }

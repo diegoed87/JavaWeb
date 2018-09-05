@@ -46,6 +46,10 @@ public class NegocioVehiculoEJB {
 		return gestionVehiculosDB.consultarVehiculoPorCliente(numCliente);
 	}
 	
+	public Vehiculo consultarVehiculoPorPlaca(String placa) {
+		return gestionVehiculosDB.consultarVehiculoPorPlaca(placa);
+	}
+	
 	public Persona consultarPersonaPorID(PersonaPK personaPK) {
 		Persona persona = null;
 		try {

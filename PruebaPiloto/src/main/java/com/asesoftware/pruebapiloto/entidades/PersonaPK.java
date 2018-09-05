@@ -21,7 +21,8 @@ public class PersonaPK implements Serializable {
 	public PersonaPK() {
 	}
 	
-
+	
+	
 	public PersonaPK(String tipoIdentificacion, String numeroIdentificacion) {
 		super();
 		this.tipoIdentificacion = tipoIdentificacion;

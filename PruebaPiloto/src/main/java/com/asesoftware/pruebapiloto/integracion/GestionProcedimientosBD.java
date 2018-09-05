@@ -21,20 +21,22 @@ public class GestionProcedimientosBD {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public Procedimiento consultarProcedimientoPorCodigo(long codigo) {
+		Procedimiento procedimiento = null;
+		try {
+			procedimiento = em.find(Procedimiento.class, codigo);
+		}catch (Exception e) {
+			System.out.println("-----------ERROR AL CONSULTAR EL PROCEDIMIENTO-----------");
+			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
+		}
+		return procedimiento;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Procedimiento> consultarProcedimientos(){
 		Query queryConsultarProcedimientos = em.createQuery("select p from Procedimiento p");
 		return queryConsultarProcedimientos.getResultList();
-	}
-	
-	public Procedimiento consultarProcedimientoPoCodigo(long codigoProcedimiento) {
-		Procedimiento aux = null;
-		try {
-			aux = em.find(Procedimiento.class, codigoProcedimiento);
-		}catch (Exception e) {
-			System.out.println("Error al consultar un procedimiento por codigo");
-		}
-		return aux;
 	}
 	
 }

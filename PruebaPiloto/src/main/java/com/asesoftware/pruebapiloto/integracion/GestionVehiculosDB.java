@@ -31,5 +31,16 @@ public class GestionVehiculosDB {
 		System.out.println(consulta.toString());
 		return consulta.getResultList();
 	}
+	
+	public Vehiculo consultarVehiculoPorPlaca(String placa) {
+		Vehiculo vehiculo = null;
+		try {
+			vehiculo = em.find(Vehiculo.class, placa);
+		}catch (Exception e) {
+			System.out.println("Ocurro un error al consultar el vehiculo de placa "+placa);
+		}
+		return vehiculo;
+		
+	}
 
 }

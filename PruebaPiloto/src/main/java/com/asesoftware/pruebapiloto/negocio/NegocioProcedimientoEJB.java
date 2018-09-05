@@ -30,4 +30,8 @@ public class NegocioProcedimientoEJB {
 		return gestionProcedimientosBD.consultarProcedimientos();
 	}
 	
+	public Procedimiento cosultarProcedimientoPorCodigo(long codigo) {
+		return gestionProcedimientosBD.consultarProcedimientoPorCodigo(codigo);
+	}
+	
 }

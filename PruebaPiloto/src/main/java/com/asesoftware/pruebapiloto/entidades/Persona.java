@@ -40,6 +40,14 @@ public class Persona implements Serializable {
 
 	private String usuario;
 
+	//bi-directional many-to-one association to Cita
+	@OneToMany(mappedBy="persona1")
+	private List<Cita> citas1;
+
+	//bi-directional many-to-one association to Cita
+	@OneToMany(mappedBy="persona2")
+	private List<Cita> citas2;
+
 	//bi-directional many-to-one association to LocalidadesGeografica
 	@ManyToOne
 	@JoinColumn(name="LOCGEO_CODIGO")
@@ -48,14 +56,6 @@ public class Persona implements Serializable {
 	//bi-directional many-to-one association to Vehiculo
 	@OneToMany(mappedBy="persona")
 	private List<Vehiculo> vehiculos;
-
-	//bi-directional many-to-one association to Cita
-	@OneToMany(mappedBy="persona1")
-	private List<Cita> citas1;
-
-	//bi-directional many-to-one association to Cita
-	@OneToMany(mappedBy="persona2")
-	private List<Cita> citas2;
 
 	public Persona() {
 	}
@@ -140,36 +140,6 @@ public class Persona implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public LocalidadesGeografica getLocalidadesGeografica() {
-		return this.localidadesGeografica;
-	}
-
-	public void setLocalidadesGeografica(LocalidadesGeografica localidadesGeografica) {
-		this.localidadesGeografica = localidadesGeografica;
-	}
-
-	public List<Vehiculo> getVehiculos() {
-		return this.vehiculos;
-	}
-
-	public void setVehiculos(List<Vehiculo> vehiculos) {
-		this.vehiculos = vehiculos;
-	}
-
-	public Vehiculo addVehiculo(Vehiculo vehiculo) {
-		getVehiculos().add(vehiculo);
-		vehiculo.setPersona(this);
-
-		return vehiculo;
-	}
-
-	public Vehiculo removeVehiculo(Vehiculo vehiculo) {
-		getVehiculos().remove(vehiculo);
-		vehiculo.setPersona(null);
-
-		return vehiculo;
-	}
-
 	public List<Cita> getCitas1() {
 		return this.citas1;
 	}
@@ -212,6 +182,36 @@ public class Persona implements Serializable {
 		citas2.setPersona2(null);
 
 		return citas2;
+	}
+
+	public LocalidadesGeografica getLocalidadesGeografica() {
+		return this.localidadesGeografica;
+	}
+
+	public void setLocalidadesGeografica(LocalidadesGeografica localidadesGeografica) {
+		this.localidadesGeografica = localidadesGeografica;
+	}
+
+	public List<Vehiculo> getVehiculos() {
+		return this.vehiculos;
+	}
+
+	public void setVehiculos(List<Vehiculo> vehiculos) {
+		this.vehiculos = vehiculos;
+	}
+
+	public Vehiculo addVehiculo(Vehiculo vehiculo) {
+		getVehiculos().add(vehiculo);
+		vehiculo.setPersona(this);
+
+		return vehiculo;
+	}
+
+	public Vehiculo removeVehiculo(Vehiculo vehiculo) {
+		getVehiculos().remove(vehiculo);
+		vehiculo.setPersona(null);
+
+		return vehiculo;
 	}
 
 }

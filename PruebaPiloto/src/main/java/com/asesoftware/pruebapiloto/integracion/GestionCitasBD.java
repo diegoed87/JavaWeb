@@ -1,5 +1,8 @@
 package com.asesoftware.pruebapiloto.integracion;
 
+
+import java.math.BigDecimal;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -20,6 +23,10 @@ public class GestionCitasBD {
 	
 	public void guardarCita(Cita cita) {
 		em.persist(cita);
+	}
+	
+	public BigDecimal secuenciaCita() {		
+		  return (BigDecimal) em.createNativeQuery("select seq_cita.currval+1 from dual").getSingleResult();
 	}
 	
 }
