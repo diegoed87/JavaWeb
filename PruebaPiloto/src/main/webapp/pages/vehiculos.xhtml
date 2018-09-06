@@ -61,7 +61,7 @@
 			
 			<p:growl id="growl" sticky="true" showDetail="true" life="3000" />	
 			
-			<p:dialog header="Registro de Vehiculo" widgetVar="dlg"
+			<p:dialog id="dialog" header="Registro de Vehiculo" widgetVar="dlg"
 						dynamic="true" modal="true" > 												
 							<h:panelGrid columns="2">
 							
@@ -108,7 +108,7 @@
 								<p:inputNumber id="kilometraje" maxlength="10" required="true"
 									value="#{vehiculoMB.kilometraje}"></p:inputNumber>
 							
-							<p:commandButton value="REGISTRAR" update="growl,formTable" style="margin-right:20px;"  actionListener="#{vehiculoMB.guardarVehiculo()}" oncomplete="PF('dlg').hide();">
+							<p:commandButton value="REGISTRAR" update="growl,formTable,dialog" style="margin-right:20px;"  actionListener="#{vehiculoMB.guardarVehiculo()}" oncomplete="PF('dlg').hide();">
     						</p:commandButton>
 			</h:panelGrid>
 			</p:dialog>
@@ -126,7 +126,7 @@
 		</p:messages>
 
 		<p:dataTable id="listaVehiculos" style="font-size:12px;" rows="10"
-			var="vehiculo" value="#{vehiculoMB.listaVehiculos}">
+			var="vehiculo" value="#{vehiculoMB.listaVehiculos}" paginator="true" binding="#{vehiculoMB.tabla}">
 			<f:facet name="header">
            		VEHICULOS REGISTRADOS
        		</f:facet>
@@ -163,10 +163,19 @@
 				<h:outputText value="#{vehiculo.kilometraje}"></h:outputText>
 			</p:column>
 
+			<p:column headerText="ACCIONES" style="width:80px">
+				<p:commandButton id="eliminar" icon="ui-icon-closethick" update="listaVehiculos,formVehiculo" actionListener="#{vehiculoMB.eliminarVehiculo()}" >
+				<p:confirm header="Confirmación" message="¿Está seguro de eliminar el vehiculo?" icon="ui-icon-alert" />
+				</p:commandButton>
+			</p:column>
 
 		</p:dataTable>
 
 	</h:form>
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+        	<p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        	<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+    </p:confirmDialog>
 </h:body>
 
 </html>

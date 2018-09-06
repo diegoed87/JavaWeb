@@ -11,6 +11,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.component.datatable.DataTable;
+
 import com.asesoftware.pruebapiloto.entidades.Persona;
 import com.asesoftware.pruebapiloto.entidades.PersonaPK;
 import com.asesoftware.pruebapiloto.entidades.Vehiculo;
@@ -39,6 +41,8 @@ public class VehiculoMB {
 	private String anio;
 	private String kilometraje;
 	private boolean disable;
+	private DataTable tabla;
+	private Vehiculo vehiculoSeleccionado;
 	
 	
 	@EJB
@@ -51,6 +55,7 @@ public class VehiculoMB {
 		this.personaPk = new PersonaPK();
 		this.vehiculo = new Vehiculo();
 		this.disable = true;
+		this.vehiculoSeleccionado = new Vehiculo();
 		}
 	
 	//falta buscar cliente por ID y sus vehiculos
@@ -66,6 +71,19 @@ public class VehiculoMB {
 		}catch (Exception e) {
 			mostrarMensaje2("El cliente no existe! "+e.getMessage(), "warn");
 		}
+	}
+	
+	public void eliminarVehiculo() {
+		System.out.println("Eliminando Vehiculo......");
+		vehiculoSeleccionado = (Vehiculo)tabla.getRowData();
+		System.out.println("Placa vehiculo seleccionado: "+vehiculoSeleccionado.getPlaca());
+		try {
+			this.negocioVehiculoEJB.eliminarVehiculo(vehiculoSeleccionado.getPlaca());
+			mostrarMensaje2("Vehiculo de placas "+vehiculoSeleccionado.getPlaca()+" Elimando correctamente!", "Info");
+		}catch (Exception e) {
+			mostrarMensaje2("No es posible eliminar el vehiculo por que se encuentra asignado a una cita!", "warn");
+		}
+		this.consultarVehiculoCLiente();
 	}
 	
 	
@@ -86,7 +104,7 @@ public class VehiculoMB {
 	}
 	
 	public void guardarVehiculo() {
-		//vehiculo = new Vehiculo();
+		vehiculo = new Vehiculo();
 		vehiculo.setPlaca(placa);
 		System.out.println("Placa: "+placa);
 		try {
@@ -108,7 +126,7 @@ public class VehiculoMB {
 		this.negocioVehiculoEJB.guardarVehiculo(vehiculo);
 		mostrarMensaje2("Vehiculo de placas "+placa+" Registrado!", "Info");
 		this.consultarVehiculoCLiente();
-		//this.limpiarCampos();
+		this.limpiarCampos();
 	}
 	
 	public void limpiarCampos() {
@@ -119,6 +137,7 @@ public class VehiculoMB {
 		this.modelo = null;
 		this.color = null;
 		this.kilometraje = null;
+		this.anio = null;
 	}
 
 	public void setListaVehiculos(List<Vehiculo> listaVehiculos) {
@@ -287,6 +306,14 @@ public class VehiculoMB {
 
 	public void setDisable(boolean disable) {
 		this.disable = disable;
+	}
+
+	public DataTable getTabla() {
+		return tabla;
+	}
+
+	public void setTabla(DataTable tabla) {
+		this.tabla = tabla;
 	}
 	
 	

@@ -42,6 +42,10 @@ public class NegocioVehiculoEJB {
 		gestionVehiculosDB.guardarVehiculo(vehiculo);
 	}
 	
+	public void eliminarVehiculo(String placa) {
+		gestionVehiculosDB.eliminarVehiculo(placa);
+	}
+	
 	public List<Vehiculo> consultarVehiculoPorCliente(String numCliente){
 		return gestionVehiculosDB.consultarVehiculoPorCliente(numCliente);
 	}

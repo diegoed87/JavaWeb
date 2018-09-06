@@ -37,4 +37,13 @@ public class GestionCitasBD {
 		return queryConsultarCitas.getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Object[] > reporteCitasPorProcedimiento(){
+		Query queryReporte = em.createNativeQuery("select p.NOMBRE_PROCEDIMIENTO, count(c.CODIGO)\r\n" + 
+				"from citas c, procedimientos p \r\n" + 
+				"where p.CODIGO_PROCEDIMIENTO = c.CODIGO_PROCEDIMIENTO\r\n" + 
+				"group by p.NOMBRE_PROCEDIMIENTO");
+		return queryReporte.getResultList();
+	}
+	
 }

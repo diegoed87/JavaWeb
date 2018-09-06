@@ -40,7 +40,19 @@ public class GestionVehiculosDB {
 			System.out.println("Ocurro un error al consultar el vehiculo de placa "+placa);
 		}
 		return vehiculo;
-		
+	}
+	
+	
+	public void eliminarVehiculo(String placa) {
+		try {
+			Vehiculo vehiculo = em.find(Vehiculo.class, placa);
+			em.remove(vehiculo);
+		}catch (Exception e) {
+			System.out.println("Ocurrio un error al eliminar el vehiculo"+e.getMessage()+" || " +e.getCause());
+			e.getMessage();
+			e.getCause();
+			e.printStackTrace();
+		}
 	}
 
 }

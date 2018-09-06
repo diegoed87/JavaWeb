@@ -73,6 +73,10 @@ public class NegocioCitaEJB {
 		return gestionCitasBD.secuenciaCita();
 	}
 	
+	public List<Object[]> reporteCitasPorProcedimiento(){
+		return gestionCitasBD.reporteCitasPorProcedimiento();
+	}
+	
 	
 
 }

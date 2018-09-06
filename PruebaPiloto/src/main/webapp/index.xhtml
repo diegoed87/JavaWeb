@@ -10,24 +10,30 @@
 
 <h:head>
 	<h:form>
+
 		<p:menubar>
 			<p:submenu label="Archivo" icon="ui-icon-document">
 				<p:menuitem value="Cliente" url="http://localhost:7001/PruebaPiloto/pages/personas.xhtml" icon="ui-icon-pencil"></p:menuitem>
 				<p:menuitem value="Vehiculos" url="http://localhost:7001/PruebaPiloto/pages/vehiculos.xhtml" icon="ui-icon-pencil"></p:menuitem>
 				<p:menuitem value="Citas" url="http://localhost:7001/PruebaPiloto/pages/citas.xhtml" icon="ui-icon-pencil"></p:menuitem>
-			</p:submenu>
-			
+			</p:submenu>	
 		</p:menubar>
-		
+			<h1 align="center">Bienvenidos</h1>
+			<br></br>
+			<h3 align="center">Conozca nuestros servicios</h3>
+		<p:contentFlow  value="#{indexMB.images}" var="image" rendered="true">
+			<p:graphicImage library="images" name="#{image}" styleClass="content"></p:graphicImage>
+			<div class="caption">#{image}</div>
+			
+		</p:contentFlow>
 	</h:form>
-	<p:imageSwitch id="images" effect="face" widgetVar="gallery" slideshowAuto="false">
-		<p:graphicImage library="images" name="imagen1.jpeg" height="150" width="100%"></p:graphicImage>
-	</p:imageSwitch>
-	<h1 align="center">Taller de Mecanica</h1>
+	
+	
+	
 </h:head>
 
-<h:body>
-
+<h:body style="background-color: rgb(230, 230, 230)">
+	
 </h:body>
 
 
