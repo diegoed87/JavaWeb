@@ -10,19 +10,26 @@
 <h:head>
 	<p:menubar>
 			<p:submenu label="Archivo" icon="ui-icon-document">
-				<p:menuitem value="Inicio" url="http://localhost:7001/PruebaPiloto/index.xhtml" icon="ui-icon-pencil"></p:menuitem>
-				<p:menuitem value="Clientes" url="http://localhost:7001/PruebaPiloto/pages/personas.xhtml" icon="ui-icon-pencil"></p:menuitem>
-				<p:menuitem value="Vehiculos" url="http://localhost:7001/PruebaPiloto/pages/vehiculos.xhtml" icon="ui-icon-pencil"></p:menuitem>
+				<p:menuitem value="Inicio" url="../index.xhtml" icon="ui-icon-home"></p:menuitem>
+				<p:menuitem value="Clientes" url="personas.xhtml" icon="ui-icon-person"></p:menuitem>
+				<p:menuitem value="Vehiculos" url="vehiculos.xhtml" icon="ui-icon-gear"></p:menuitem>
+				<p:menuitem value="Procedimiento" url="procedimiento.xhtml" icon="ui-icon-arrow-4"></p:menuitem>
+				<p:menuitem value="Reporte" url="reporte.xhtml" icon="ui-icon-print"></p:menuitem>	
+				
 			</p:submenu>			
 		</p:menubar>
 </h:head>    
     
-<h:body>
-	<h:form id="form" style="width: 599px; ">
+<h:body >
+	<p:panel>
 	
 		<p:messages id="messages" showDetail="true" closable="true">
         	<p:autoUpdate />
     	</p:messages>
+		<h:panelGrid columns="2" cellpadding="2">
+		
+	<h:form id="form" style="width: 599px; ">
+	
 		<p:panel id="panel" header="REGISTRO DE CITAS" style="margin-bottom:10px;font-size:12px; width:left;" >
 			<h:panelGrid columns="2" cellpadding="2">
 				
@@ -106,6 +113,9 @@
 		</p:panel>
 	
 	</h:form>
+	
+	</h:panelGrid>
+	</p:panel>
 	<br></br>
 	<h:form id="formTable" >
 		<p:dataTable id="listaCitas" var="cita" value="#{citaMB.listaCitas}" style="font-size:12px;" rows="10" paginator="true">

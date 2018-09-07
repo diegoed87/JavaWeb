@@ -34,4 +34,12 @@ public class NegocioProcedimientoEJB {
 		return gestionProcedimientosBD.consultarProcedimientoPorCodigo(codigo);
 	}
 	
+	public void borrarProcedimiento(long codigoProcedimiento) {
+		 gestionProcedimientosBD.eliminarProcedimiento(codigoProcedimiento);
+	}
+	
+	public void editarProcedimiento( Procedimiento procedimiento) {
+		gestionProcedimientosBD.editarProcedimiento(procedimiento);
+	}
+	
 }

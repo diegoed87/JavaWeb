@@ -1,5 +1,6 @@
 package com.asesoftware.pruebapiloto.integracion;
 
+
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -16,6 +17,7 @@ public class GestionProcedimientosBD {
 	
 	@PersistenceContext
 	private EntityManager em;
+	
 
 	public GestionProcedimientosBD() {
 		// TODO Auto-generated constructor stub
@@ -38,5 +40,20 @@ public class GestionProcedimientosBD {
 		Query queryConsultarProcedimientos = em.createQuery("select p from Procedimiento p");
 		return queryConsultarProcedimientos.getResultList();
 	}
+	
+	public void editarProcedimiento(Procedimiento procedimiento) {
+		em.merge(procedimiento);
+	}
+	
+	public void eliminarProcedimiento(long codigoProcedimiento) {
+		Procedimiento proced = null;
+		try {
+			proced =  em.find(Procedimiento.class, codigoProcedimiento);
+			em.remove(proced);
+	}catch (Exception e) {
+		System.out.println("Error al borrar procedimiento "+ codigoProcedimiento);
+	}
+	
+}
 	
 }

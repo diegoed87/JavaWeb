@@ -19,7 +19,8 @@ import com.asesoftware.pruebapiloto.entidades.Persona;
 	    @PersistenceContext
 	    private EntityManager entityManager;
 	    	        
-	    public List<Persona> consultarUser(){
+	    @SuppressWarnings("unchecked")
+		public List<Persona> consultarUser(){
 	    	Query queryConsultaUser = entityManager.createQuery("select p from Persona p");
 	    	return queryConsultaUser.getResultList();
 	    }    
